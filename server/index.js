@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+database = require('./database');
 
 const app = express();
 
@@ -13,7 +14,17 @@ app.use(cors());
  * MongoDB connection info
  * Remember to set the src url
  */
-mongoose.connect(process.env.MONGODB_SRC, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.Promise = global.Promise;
+mongoose.connect(database.db, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => {
+    console.log("Database connected")
+  },
+  error => {
+    console.log("Database could't be connected to: " + error)
+  }
+)
 
 let db = mongoose.connection;
 
