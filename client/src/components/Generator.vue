@@ -34,7 +34,7 @@ export default {
       } else {
         request = await GeneratorService.generateLink(this.link);
       }
-      this.generatedLink = `https://houge.ninja/l/${request.shortCode}`;
+      this.generatedLink = `https://haily.herokuapp.com/${request.shortCode}`;
 
       this.$emit("newLink");
     },
